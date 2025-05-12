@@ -10,7 +10,7 @@ pipeline {
 	stages {
 		stage('Checkout Github'){
 			steps {
-			git branch: 'main', credentialsId: 'GitOps-token-GitHub', url: 'https://github.com/iQuantC/Jenkins-ArgoCD-GitOps.git'
+			git branch: 'main', credentialsId: 'GitOps-token-github', url: 'https://github.com/Kush-sh10/k8S-minikube.git'
 			}
 		}		
 		stage('Install node dependencies'){
