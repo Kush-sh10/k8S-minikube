@@ -59,7 +59,7 @@ pipeline {
 		stage('Apply Kubernetes Manifests & Sync App with ArgoCD'){
 			steps {
 				script {
-					kubeconfig(credentialsId: 'kubeconfig', serverUrl: 'https://192.168.49.2:8443') {
+					kubeconfig(credentialsId: 'kubeconfig', serverUrl: 'https://192.168.49.2:8443'){
     						sh '''
 						argocd login 65.0.72.69:30540 --username admin --password $(kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d) --insecure
 						argocd app sync argocdjenkins
@@ -79,4 +79,4 @@ pipeline {
 			echo 'Build&Deploy failed. Check logs.'
 		}
 	}
-}
+65.0.72.69:30540}
