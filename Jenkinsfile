@@ -17,6 +17,7 @@ pipeline {
             }
         }
 
+
         stage('Install node dependencies') {
             steps {
                 sh 'npm install'
@@ -68,14 +69,16 @@ pipeline {
                 script {
                     kubeconfig(credentialsId: 'kubeconf', serverUrl: 'https://192.168.49.2:8443') {
                         sh '''
-                        argocd login 65.0.72.69:31883 --username admin --password $(kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d) --insecure
-                        argocd app sync argocdjenkins
-                        '''
+                kubectl version --client
+                argocd login 65.0.72.69:31883 --username admin --password $(kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d) --insecure
+                argocd app sync argocdjenkins
+                '''
                     }
                 }
             }
         }
     }
+    
 
     post {
         success {
